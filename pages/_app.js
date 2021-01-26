@@ -1,4 +1,6 @@
+import React from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import Head from 'next/head'
 import db from '../db.json'
 
 const GlobalStyle = createGlobalStyle`
@@ -23,11 +25,19 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const theme = db.theme
+const { theme } = db
 
 export default function App({ Component, pageProps }) {
   return (
     <>
+      <Head>
+        <title>{db.title}</title>
+        <meta property="og:title" content={db.title} key="og-title" />
+        <meta property="og:image" content={db.bg} key="og-image" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" key="font-preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" key="font" />
+      </Head>
+
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Component {...pageProps} />
