@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import styled from 'styled-components'
 import db from '../db.json'
 import Widget from '../src/components/Widget'
@@ -20,6 +21,12 @@ export const QuizContainer = styled.div`
 export default function Home() {
   return (
     <QuizBackground backgroundImage={db.bg}>
+      <Head>
+        <title>{db.title}</title>
+        <meta property="og:title" content={db.title} key="title" />
+        <meta property="og:image" content={db.bg} />
+      </Head>
+
       <QuizContainer>
         <QuizLogo />
         
@@ -43,7 +50,7 @@ export default function Home() {
 
         <Footer />
 
-        <GitHubCorner projectUrl="" />
+        <GitHubCorner projectUrl="https://github.com/alexpvieira/aluraquiz" />
       </QuizContainer>
     </QuizBackground>
   )
